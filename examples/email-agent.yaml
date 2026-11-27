@@ -1,0 +1,25 @@
+# Example policy for a small email agent: not TakaPay-specific.
+# A reply may only go to an address the user named or a saved contact, and
+# must not carry a code (sign-in code, password reset) read from an email or a web page.
+version: 1
+name: email-agent
+default_action: ask
+untrusted_tools: [read_inbox, fetch_url, search_docs]
+codes:
+  pattern: '\b\d{6}\b'
+  context: 'code|password|verification|one[- ]time|কোড|পাসওয়ার্ড'
+tools:
+  send_email:
+    arguments:
+      to:
+        type: email
+        trusted_from: [user_request, "list:contacts"]
+      body:
+        type: text
+        no_untrusted_codes: true
+        action: block
+  forward_email:
+    arguments:
+      to:
+        type: email
+        trusted_from: [user_request, "list:contacts"]
