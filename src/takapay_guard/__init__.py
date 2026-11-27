@@ -9,8 +9,9 @@ Banglish and English.
 """
 
 from .engine import Decision, Guard
+from .wrapper import GuardedTools, run_openai_loop
 from .policy import Policy, PolicyError, builtin_policies, load_builtin, load_policy
 
 __version__ = "0.1.0.dev0"
 
-__all__ = ["Decision", "Guard", "Policy", "PolicyError", "builtin_policies", "load_builtin", "load_policy", "__version__"]
+__all__ = ["Decision", "Guard", "GuardedTools", "run_openai_loop", "Policy", "PolicyError", "builtin_policies", "load_builtin", "load_policy", "__version__"]
